@@ -59,10 +59,10 @@ CREATE TABLE IF NOT EXISTS `bills` (
 
 
 CREATE TABLE IF NOT EXISTS `characters` (
-  `identifier` varchar(50) COLLATE utf8mb4_bin NOT NULL DEFAULT '',
-  `steamname` varchar(50) COLLATE utf8mb4_bin NOT NULL DEFAULT '',
+  `identifier` VARCHAR(50) COLLATE utf8mb4_bin NOT NULL DEFAULT '',
+  `steamname` VARCHAR(50) COLLATE utf8mb4_bin NOT NULL DEFAULT '',
   `charidentifier` int(11) NOT NULL AUTO_INCREMENT,
-  `group` varchar(10) COLLATE utf8mb4_bin DEFAULT 'user',
+  `group` VARCHAR(10) COLLATE utf8mb4_bin DEFAULT 'user',
   `money` double(11,2) DEFAULT 0.00,
   `gold` double(11,2) DEFAULT 0.00,
   `rol` double(11,2) NOT NULL DEFAULT 0.00,
@@ -74,29 +74,29 @@ CREATE TABLE IF NOT EXISTS `characters` (
   `hours` float NOT NULL DEFAULT 0,
   `LastLogin` date DEFAULT NULL,
   `inventory` longtext COLLATE utf8mb4_bin DEFAULT NULL,
-  `job` varchar(50) COLLATE utf8mb4_bin DEFAULT 'unemployed',
-  `status` varchar(140) COLLATE utf8mb4_bin DEFAULT '{}',
-  `meta` varchar(255) COLLATE utf8mb4_bin NOT NULL DEFAULT '{}',
-  `firstname` varchar(50) COLLATE utf8mb4_bin DEFAULT ' ',
-  `lastname` varchar(50) COLLATE utf8mb4_bin DEFAULT ' ',
+  `job` VARCHAR(50) COLLATE utf8mb4_bin DEFAULT 'unemployed',
+  `status` VARCHAR(140) COLLATE utf8mb4_bin DEFAULT '{}',
+  `meta` VARCHAR(255) COLLATE utf8mb4_bin NOT NULL DEFAULT '{}',
+  `firstname` VARCHAR(50) COLLATE utf8mb4_bin DEFAULT ' ',
+  `lastname` VARCHAR(50) COLLATE utf8mb4_bin DEFAULT ' ',
   `skinPlayer` longtext COLLATE utf8mb4_bin DEFAULT NULL,
   `compPlayer` longtext COLLATE utf8mb4_bin DEFAULT NULL,
   `jobgrade` int(11) DEFAULT 0,
-  `coords` VARCHAR(512) COLLATE utf8mb4_bin DEFAULT '{}', 
+  `coords` VARCHAR(255) COLLATE utf8mb4_bin DEFAULT '{}', 
   `isdead` tinyint(1) DEFAULT 0,
   `clanid` int(11) DEFAULT 0,
   `trust` int(11) DEFAULT 0,
   `supporter` int(11) DEFAULT 0,
-  `walk` varchar(50) COLLATE utf8mb4_bin DEFAULT 'noanim',
-  `crafting` VARCHAR(512) COLLATE utf8mb4_bin DEFAULT '{"medical":0,"blacksmith":0,"basic":0,"survival":0,"brewing":0,"food":0}',
-  `info` VARCHAR(512) COLLATE utf8mb4_bin DEFAULT '{}',
+  `walk` VARCHAR(50) COLLATE utf8mb4_bin DEFAULT 'noanim',
+  `crafting` VARCHAR(768) COLLATE utf8mb4_bin DEFAULT '{"medical":0,"blacksmith":0,"basic":0,"survival":0,"brewing":0,"food":0}',
+  `info` VARCHAR(768) COLLATE utf8mb4_bin DEFAULT '{}',
   `gunsmith` double(11,2) DEFAULT 0.00,
-  `ammo` VARCHAR(512) COLLATE utf8mb4_bin DEFAULT '{}',
+  `ammo` VARCHAR(255) COLLATE utf8mb4_bin DEFAULT '{}',
   `clan` int(11) DEFAULT 0,
-  `discordid` varchar(255) COLLATE utf8mb4_bin DEFAULT '0',
-  `lastjoined` VARCHAR(512) COLLATE utf8mb4_bin DEFAULT '[]',
-  `motel` varchar(255) COLLATE utf8mb4_bin DEFAULT '0',
-  `moonshineenty` VARCHAR(512) COLLATE utf8mb4_bin DEFAULT '{}',
+  `discordid` VARCHAR(255) COLLATE utf8mb4_bin DEFAULT '0',
+  `lastjoined` VARCHAR(255) COLLATE utf8mb4_bin DEFAULT '[]',
+  `motel` VARCHAR(255) COLLATE utf8mb4_bin DEFAULT '0',
+  `moonshineenty` VARCHAR(255) COLLATE utf8mb4_bin DEFAULT '{}',
   UNIQUE KEY `identifier_charidentifier` (`identifier`,`charidentifier`) USING BTREE,
   KEY `charidentifier` (`charidentifier`) USING BTREE,
   KEY `clanid` (`clanid`),
@@ -116,7 +116,7 @@ SET FOREIGN_KEY_CHECKS = 0;
 
 CREATE TABLE `housing`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `identifier` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `identifier` VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `charidentifier` int(11) NOT NULL,
   `inventory` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
   `furniture` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
@@ -128,7 +128,7 @@ CREATE TABLE `rooms`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `interiorId` int(11) NOT NULL,
   `inventory` longtext CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
-  `identifier` varchar(60) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `identifier` VARCHAR(60) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `charidentifier` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
@@ -137,7 +137,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 
 CREATE TABLE IF NOT EXISTS `character_inventories` (
   `character_id` int(11) DEFAULT NULL,
-  `inventory_type` varchar(100) NOT NULL DEFAULT 'default',
+  `inventory_type` VARCHAR(100) NOT NULL DEFAULT 'default',
   `item_crafted_id` int(11) NOT NULL,
   `amount` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT current_timestamp(),
@@ -155,21 +155,21 @@ CREATE TABLE IF NOT EXISTS `doors` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE IF NOT EXISTS `herbalists` (
-  `identifier` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `identifier` VARCHAR(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `charidentifier` int(11) NOT NULL,
-  `location` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `location` VARCHAR(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   PRIMARY KEY (`identifier`) USING BTREE,
   UNIQUE KEY `identifier_charidentifier` (`identifier`,`charidentifier`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 CREATE TABLE IF NOT EXISTS `horses` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `identifier` varchar(40) NOT NULL,
+  `identifier` VARCHAR(40) NOT NULL,
   `charid` int(11) NOT NULL,
   `selected` int(11) NOT NULL DEFAULT 0,
-  `model` varchar(50) NOT NULL,
-  `name` varchar(50) NOT NULL,
-  `components` varchar(5000) NOT NULL DEFAULT '{}',
+  `model` VARCHAR(50) NOT NULL,
+  `name` VARCHAR(50) NOT NULL,
+  `components` VARCHAR(5000) NOT NULL DEFAULT '{}',
   `exp` int(11) NOT NULL DEFAULT 0,
   `items` VARCHAR(512) DEFAULT '{}',
   `sex` int(11) DEFAULT 0,
@@ -179,7 +179,7 @@ CREATE TABLE IF NOT EXISTS `horses` (
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE IF NOT EXISTS `horse_complements` (
-  `identifier` varchar(50) NOT NULL,
+  `identifier` VARCHAR(50) NOT NULL,
   `charidentifier` int(11) NOT NULL,
   `complements` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   UNIQUE KEY `identifier` (`identifier`) USING BTREE
@@ -187,7 +187,7 @@ CREATE TABLE IF NOT EXISTS `horse_complements` (
 
 CREATE TABLE IF NOT EXISTS `housing` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `identifier` varchar(255) DEFAULT NULL,
+  `identifier` VARCHAR(255) DEFAULT NULL,
   `charidentifier` int(11) NOT NULL,
   `inventory` longtext DEFAULT NULL,
   `furniture` longtext DEFAULT NULL,
@@ -196,15 +196,15 @@ CREATE TABLE IF NOT EXISTS `housing` (
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 CREATE TABLE IF NOT EXISTS `items` (
-  `item` varchar(50) NOT NULL,
-  `label` varchar(50) NOT NULL,
+  `item` VARCHAR(50) NOT NULL,
+  `label` VARCHAR(50) NOT NULL,
   `limit` int(11) NOT NULL DEFAULT 1,
   `can_remove` tinyint(1) NOT NULL DEFAULT 1,
  `type` VARCHAR(50) NULL DEFAULT 'item_standard' COLLATE 'utf8mb4_general_ci',
   `usable` tinyint(1) DEFAULT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `metadata` VARCHAR(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT '{}' CHECK (json_valid(`metadata`)),
-  `desc` varchar(5550) NOT NULL DEFAULT 'nice item',
+  `desc` VARCHAR(5550) NOT NULL DEFAULT 'nice item',
   PRIMARY KEY (`item`) USING BTREE,
   UNIQUE KEY `id` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
@@ -221,20 +221,20 @@ CREATE TABLE IF NOT EXISTS `items_crafted` (
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE IF NOT EXISTS `jail` (
-  `identifier` varchar(100) NOT NULL DEFAULT '0',
-  `name` varchar(100) NOT NULL DEFAULT '0',
-  `characterid` varchar(5) NOT NULL DEFAULT '0',
-  `time` varchar(100) NOT NULL DEFAULT '0',
-  `time_s` varchar(100) NOT NULL DEFAULT '0'
+  `identifier` VARCHAR(100) NOT NULL DEFAULT '0',
+  `name` VARCHAR(100) NOT NULL DEFAULT '0',
+  `characterid` VARCHAR(5) NOT NULL DEFAULT '0',
+  `time` VARCHAR(100) NOT NULL DEFAULT '0',
+  `time_s` VARCHAR(100) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `loadout` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `identifier` VARCHAR(50) NOT NULL COLLATE 'utf8mb4_bin',
   `charidentifier` int(11) DEFAULT NULL,
-  `name` varchar(50) DEFAULT NULL,
-  `ammo` varchar(255) NOT NULL DEFAULT '{}',
-  `components` varchar(255) NOT NULL DEFAULT '{}',
+  `name` VARCHAR(50) DEFAULT NULL,
+  `ammo` VARCHAR(255) NOT NULL DEFAULT '{}',
+  `components` VARCHAR(255) NOT NULL DEFAULT '{}',
   `dirtlevel` double DEFAULT 0,
   `mudlevel` double DEFAULT 0,
   `conditionlevel` double DEFAULT 0,
@@ -243,8 +243,8 @@ CREATE TABLE IF NOT EXISTS `loadout` (
   `used2` tinyint(4) DEFAULT 0,
   `dropped` int(11) NOT NULL DEFAULT 0,
   `comps` VARCHAR(512) NOT NULL DEFAULT '{}',
-  `label` varchar(50) DEFAULT NULL,
-  `curr_inv` varchar(100) NOT NULL DEFAULT 'default',
+  `label` VARCHAR(50) DEFAULT NULL,
+  `curr_inv` VARCHAR(100) NOT NULL DEFAULT 'default',
   PRIMARY KEY (`id`),
   KEY `id` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
@@ -252,12 +252,12 @@ CREATE TABLE IF NOT EXISTS `loadout` (
 
 CREATE TABLE IF NOT EXISTS `mailbox_mails` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `sender_id` varchar(50) DEFAULT NULL,
-  `sender_firstname` varchar(50) DEFAULT NULL,
-  `sender_lastname` varchar(50) DEFAULT NULL,
-  `receiver_id` varchar(50) DEFAULT NULL,
-  `receiver_firstname` varchar(50) DEFAULT NULL,
-  `receiver_lastname` varchar(50) DEFAULT NULL,
+  `sender_id` VARCHAR(50) DEFAULT NULL,
+  `sender_firstname` VARCHAR(50) DEFAULT NULL,
+  `sender_lastname` VARCHAR(50) DEFAULT NULL,
+  `receiver_id` VARCHAR(50) DEFAULT NULL,
+  `receiver_firstname` VARCHAR(50) DEFAULT NULL,
+  `receiver_lastname` VARCHAR(50) DEFAULT NULL,
   `message` text DEFAULT NULL,
   `opened` tinyint(1) DEFAULT 0,
   `received_at` datetime DEFAULT current_timestamp(),
@@ -266,9 +266,9 @@ CREATE TABLE IF NOT EXISTS `mailbox_mails` (
 
 CREATE TABLE IF NOT EXISTS `outfits` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `identifier` varchar(45) NOT NULL,
+  `identifier` VARCHAR(45) NOT NULL,
   `charidentifier` int(11) DEFAULT NULL,
-  `title` varchar(255) DEFAULT NULL,
+  `title` VARCHAR(255) DEFAULT NULL,
   `comps` longtext DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
@@ -278,7 +278,7 @@ CREATE TABLE IF NOT EXISTS `rooms` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `interiorId` int(11) NOT NULL,
   `inventory` longtext DEFAULT NULL,
-  `identifier` varchar(60) NOT NULL,
+  `identifier` VARCHAR(60) NOT NULL,
   `charidentifier` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC;
@@ -286,11 +286,11 @@ CREATE TABLE IF NOT EXISTS `rooms` (
 
 CREATE TABLE IF NOT EXISTS `stables` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `identifier` varchar(50) NOT NULL,
+  `identifier` VARCHAR(50) NOT NULL,
   `charidentifier` int(11) NOT NULL,
-  `name` varchar(30) NOT NULL,
-  `modelname` varchar(70) NOT NULL,
-  `type` varchar(11) NOT NULL,
+  `name` VARCHAR(30) NOT NULL,
+  `modelname` VARCHAR(70) NOT NULL,
+  `type` VARCHAR(11) NOT NULL,
   `status` longtext DEFAULT NULL,
   `xp` int(11) DEFAULT 0,
   `injured` int(11) DEFAULT 0,
@@ -302,11 +302,11 @@ CREATE TABLE IF NOT EXISTS `stables` (
 
 CREATE TABLE IF NOT EXISTS `wagons` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `identifier` varchar(40) NOT NULL,
+  `identifier` VARCHAR(40) NOT NULL,
   `charid` int(11) NOT NULL,
   `selected` int(11) NOT NULL DEFAULT 0,
-  `model` varchar(50) NOT NULL,
-  `name` varchar(50) NOT NULL,
+  `model` VARCHAR(50) NOT NULL,
+  `name` VARCHAR(50) NOT NULL,
   `items` VARCHAR(512) DEFAULT '{}',
   PRIMARY KEY (`id`),
   KEY `FK_horses_characters` (`charid`),
@@ -314,11 +314,11 @@ CREATE TABLE IF NOT EXISTS `wagons` (
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE IF NOT EXISTS `wagon_water` (
-  `identifier` varchar(255) COLLATE latin1_general_cs DEFAULT '0',
-  `charid` varchar(255) COLLATE latin1_general_cs DEFAULT '0',
-  `wagon` varchar(255) COLLATE latin1_general_cs DEFAULT '0',
-  `water` varchar(255) COLLATE latin1_general_cs DEFAULT '0',
-  `wagon_name` varchar(50) COLLATE latin1_general_cs DEFAULT NULL
+  `identifier` VARCHAR(255) COLLATE latin1_general_cs DEFAULT '0',
+  `charid` VARCHAR(255) COLLATE latin1_general_cs DEFAULT '0',
+  `wagon` VARCHAR(255) COLLATE latin1_general_cs DEFAULT '0',
+  `water` VARCHAR(255) COLLATE latin1_general_cs DEFAULT '0',
+  `wagon_name` VARCHAR(50) COLLATE latin1_general_cs DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs;
 
 CREATE TABLE `whitelist` (
